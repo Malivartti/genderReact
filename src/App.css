@@ -1,0 +1,40 @@
+.App {
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input {
+  font-size: inherit;
+  outline:none;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border: 1px solid black;
+  border-top-left-radius: 8px;
+}
+
+
+.button {
+  font-size: inherit;
+  display: block;
+  background: transparent;
+  background: rgb(201, 247, 255);
+  border: none;
+  border: 1px solid black;
+  border-left: none;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.output {
+  text-align: center;
+}
