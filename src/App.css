@@ -38,3 +38,7 @@
 .output {
   text-align: center;
 }
+
+.value {
+  background: rgb(201, 247, 255);
+}

@@ -24,15 +24,22 @@ class FormApp extends React.Component {
   }
 
   handleSubmit(e) {
-    this.props.sendValue(this.state.value)
+    this.props.changeName(this.state.value)
     e.preventDefault();
   }
 
   render() {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
-        <input className='input' type="text" placeholder='Name' value={this.state.value} onChange={this.handleChange} />
-        <button className='button' type="submit">Search</button>
+        <input 
+          className='input' 
+          type="text" 
+          placeholder='Name' 
+          value={this.state.value} 
+          onChange={this.handleChange} />
+        <button 
+          className='button' 
+          type="submit">Search</button>
       </form>
     )
   }
@@ -40,12 +47,21 @@ class FormApp extends React.Component {
 
 
 function OutputApp(props) {
-  let gender = props.gender
-  if (gender == null) {
-    gender = 'the alien'
+  const gender = props.gender
+  let name = <span>Gender <span className='value'>{props.name}</span> is </span>
+  let value;
+
+  if (gender === '') return null;
+  if (gender === null) {
+    value = <span className='value'>the alien</span>
+  } else if (props.name.length < 2) {
+    name = ''
+    value = <span style={{color: 'red'}}>Short name</span>
+  } else {
+    value = <span className='value'>{gender}</span>
   }
   return (
-    <p className="output">Gender {props.name} is {gender}</p>
+    <p className="output">{name} {value}</p>
   )
 }
 
@@ -54,19 +70,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {name: '', gender: ''};
-    this.getValue = this.getValue.bind(this);
+    this.changeNameGender = this.changeNameGender.bind(this);
   }
 
-  async getValue(value) {
+  async changeNameGender(value) {
     const date = await getGender(value)
-    this.setState({name: value});
-    this.setState({gender: date})
+    this.setState({name: value, gender: date});
   }
 
   render() {
     return (
       <div className="App">
-        <FormApp sendValue={this.getValue}/>
+        <FormApp changeName={this.changeNameGender}/>
         <OutputApp name={this.state.name} gender={this.state.gender}/>
       </div>
     )
